@@ -3,7 +3,7 @@
 module.exports = function( ) {
     var express = require( "express" )
       , router = express.Router()
-      , controller = require( '../controllers/test' );
+      , controller = require( '../controllers/player_ctrl' );
 
     router.route( '/' )
         .get( controller.list );
@@ -16,8 +16,8 @@ module.exports = function( ) {
     // router.route( '/:id/projects' )
     //         .get( controller.getProjects );
 
-    // router.route( '/:id' )
-    //     .get( controller.get )
+    router.route( '/:id' )
+        .get( controller.get )
     //     .put( controller.update )
     //     .delete( controller.delete );
 
