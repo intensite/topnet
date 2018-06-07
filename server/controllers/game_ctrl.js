@@ -5,30 +5,30 @@ var log = require('loglevel');
 
 module.exports = {
     name: "Game",
-  
-    list: function(req, res, next) {
-        // console.log('Inside controller..')
-       gameService.getAll(req.query).then(function(games) {
-         res.send(games);
-       })
+
+    list: function (req, res, next) {
+        gameService.getAll(req.query).then(function (result) {
+            res.send(result);
+        })
     },
+
     get: function (req, res, next) {
         var id = req.params.id;
-        gameService.getOneById(id).then(function(games) {
-            res.send(games);
-          })
+        gameService.getOneById(id).then(function (result) {
+            res.send(result);
+        })
     },
+
     update: function (req, res, next) {
         var id = req.params.id;
         var values = req.body
-        gameService.update(id,values).then(function(games) {
-            res.send(games);
-          }).catch((err) => {
-            console.log(`Error in game_ctrl::update()`);
+        gameService.update(id, values).then(function (result) {
+            res.send(result);
+        }).catch((err) => {
+            log.error(`Error in ${name}_ctrl::update()`);
             log.error(`Database UPDATE problems ${err}`);
             res.status(400).send(`Database UPDATE problems ${err}`);
         })
     }
 
 }
-  

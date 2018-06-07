@@ -27,5 +27,15 @@ module.exports = {
             // console.log(rows);
             return rows;
         })
-    }
+    },
+
+    update: function(id, values) {        
+        return db.query('UPDATE players SET ? where id = ?', [values, id]).then(([rows, fields]) => {
+            return rows;
+        }).catch((err) => {
+            console.log(`Error in player_service::update()`);
+            console.log(`Database UPDATE problems ${err}`);
+            throw new Error(err);
+        })
+    }    
 }

@@ -18,7 +18,7 @@ module.exports = function( ) {
 
     router.route( '/:id' )
         .get( controller.get )
-    //     .put( controller.update )
+        .put( controller.update )
     //     .delete( controller.delete );
 
     return router;

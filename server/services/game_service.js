@@ -34,25 +34,23 @@ module.exports = {
         log.debug(sql);
 
         return db.query(sql,existingParams.map(field => filters[field]) ).then(([rows, fields]) => {
-            // console.log(rows);
             return rows;
         })
     },
+
     getOneById: function(id) {        
         return db.query('select * from games where id = ?', id).then(([rows, fields]) => {
-            // console.log(rows);
             return rows;
         })
     },
+
     update: function(id, values) {        
         return db.query('UPDATE games SET ? where id = ?', [values, id]).then(([rows, fields]) => {
-            // console.log(rows);
             return rows;
         }).catch((err) => {
             console.log(`Error in game_service::update()`);
             console.log(`Database UPDATE problems ${err}`);
             throw new Error(err);
-            // return err;
         })
     }
 }
