@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 // import { PlayerListComponent } from './player-list.component';
 
 const routes: Routes = [
-  { path: '', component: PlayerListComponent  },
+  // { path: '', component: PlayerListComponent  },
   { path: 'players', component: PlayerListComponent }
 ];
 
