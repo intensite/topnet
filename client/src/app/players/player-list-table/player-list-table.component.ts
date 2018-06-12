@@ -13,7 +13,7 @@ export class PlayerListTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['name', 'email', 'position', 'skills', 'games', 'status'];
 
   dataSource = new PlayerListTableDataSource(this.playerService, this.paginator, this.sort);
   // dataSource = new PlayerListTableDataSource(this.playerService);

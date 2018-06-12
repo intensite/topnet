@@ -15,8 +15,10 @@ conn.DBConnect().then(dbconn => {
 
 module.exports = {
     getAll: function (filters) {
+        var sql = 'select pl.*, pos.name_fr as position, pos.abreviation_fr as position_abrv from players pl inner join positions pos on pl.position_id = pos.id'
 
-        return db.query('select * from players').then(([rows, fields]) => {
+
+        return db.query(sql).then(([rows, fields]) => {
             // console.log(rows);
             return rows;
         })

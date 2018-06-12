@@ -1,16 +1,44 @@
 <div class="mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
 
-    <!-- Id Column -->
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- <ng-container matColumnDef="image">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>image</mat-header-cell>
+      <mat-cell *matCellDef="let row"><img src="assets/img/phantom_player.png" alt="" class="avatar"></mat-cell>
+    </ng-container> -->
+
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+      <mat-cell *matCellDef="let row"><span layout-align="start center"><img src="assets/img/phantom_player.png" alt="" class="avatar"><a href="#" class="bold-link">{{row.name}}</a></span></mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Position</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="skills">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Skill points</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.skill_points}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="games">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Matchs joués</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.game_played}}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.status}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -18,7 +46,7 @@
   </mat-table>
 
   <mat-paginator #paginator
-    [length]="dataSource.data.length"
+    [length]="dataSource.length"
     [pageIndex]="0"
     [pageSize]="50"
     [pageSizeOptions]="[25, 50, 100, 250]">

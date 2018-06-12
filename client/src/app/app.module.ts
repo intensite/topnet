@@ -5,18 +5,20 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppNavComponent } from './app-nav/app-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
-import { PlayerListComponent } from './player-list/player-list.component';
+import { PlayerListComponent } from './players/player-list/player-list.component';
 import { PlayerListTableComponent } from './players/player-list-table/player-list-table.component';
+import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppNavComponent,
     PlayerListComponent,
-    PlayerListTableComponent
+    PlayerListTableComponent,
+    ScheduleListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { PlayerListTableComponent } from './players/player-list-table/player-lis
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
     HttpClientModule,
   ],
   providers: [],
