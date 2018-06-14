@@ -16,7 +16,8 @@ conn.DBConnect().then(dbconn => {
 module.exports = {
     getAll: function (filters) {
 
-        var sql = "SELECT * from games ";
+        var sql = `select * from v_games`;
+
         const possibleParams =["league_id", "season_id", "location_id", "game_date"];
         var existingParams =[];
 
@@ -28,6 +29,8 @@ module.exports = {
             sql += " WHERE ";
             sql += existingParams.map(field => `${field} = ?`).join(" AND ");
         }
+
+        sql += " order by season_game_no"
     
         log.debug(filters);
         log.debug(existingParams);

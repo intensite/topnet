@@ -9,35 +9,37 @@ var db;
 conn.DBConnect().then(dbconn => {
     db = dbconn;
 })
-.catch(err => {
-    console.log(err)
-});
+    .catch(err => {
+        console.log(err)
+    });
 
 module.exports = {
-    getAll: function (filters) {
+    getAll: async function (filters) {
         var sql = 'select pl.*, pos.name_fr as position, pos.abreviation_fr as position_abrv from players pl inner join positions pos on pl.position_id = pos.id'
+        try {
+            console.log('Before the query..');
+            const [result] = await db.query(sql)
+            console.log('The wait is over..');
+            return result;
 
-
-        return db.query(sql).then(([rows, fields]) => {
-            // console.log(rows);
-            return rows;
-        })
+        } catch (err) {
+            return err;
+        }
     },
-    getOneById: function(id) {
-        
-        return db.query('select * from players where id = ?', id).then(([rows, fields]) => {
-            // console.log(rows);
-            return rows;
-        })
+    
+    getOneById: async function (id) {
+        const [result] = await db.query('select * from players where id = ?', id)
+        return result;
     },
 
-    update: function(id, values) {        
-        return db.query('UPDATE players SET ? where id = ?', [values, id]).then(([rows, fields]) => {
+    update: async function (id, values) {
+        try {
+            const [result] = await db.query('UPDATE players SET ? where id = ?', [values, id]);
             return rows;
-        }).catch((err) => {
+        } catch (err) {
             console.log(`Error in player_service::update()`);
             console.log(`Database UPDATE problems ${err}`);
             throw new Error(err);
-        })
-    }    
+        }
+    }
 }

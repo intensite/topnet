@@ -6,27 +6,19 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PlayerService {
-  private playerUrl = 'http://localhost:3000/api/player/';  // URL to web api
+export class GameService {
+  private gamerUrl = 'http://localhost:3000/api/game/';  // URL to web api
+
 
   constructor(private http: HttpClient) { }
 
-  getPlayers(): Observable<any[]> {
-    return this.http.get<any[]>(this.playerUrl)
+  getGames(): Observable<any[]> {
+    return this.http.get<any[]>(this.gamerUrl)
       .pipe(
-        tap(heroes => this.log(`fetched players`)),
-        catchError(this.handleError('getPlayers', []))
+        tap(heroes => this.log(`fetched games`)),
+        catchError(this.handleError('getGamess', []))
       );
   }
-
-  // /** GET hero by id. Will 404 if id not found */
-  // getHero(id: number): Observable<Player> {
-  //   const url = `${this.heroesUrl}/${id}`;
-  //   return this.http.get<Hero>(url).pipe(
-  //     tap(_ => this.log(`fetched hero id=${id}`)),
-  //     catchError(this.handleError<Hero>(`getHero id=${id}`))
-  //   );
-  // }
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
@@ -34,7 +26,7 @@ export class PlayerService {
     console.log(message);
   }
 
-  /**
+/**
 * Handle Http operation that failed.
 * Let the app continue.
 * @param operation - name of the operation that failed
@@ -53,6 +45,5 @@ export class PlayerService {
       return of(result as T);
     };
   }
-
 
 }

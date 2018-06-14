@@ -11,6 +11,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { PlayerListComponent } from './players/player-list/player-list.component';
 import { PlayerListTableComponent } from './players/player-list-table/player-list-table.component';
 import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
+import { ScheduleListTableComponent } from './schedule/schedule-list-table/schedule-list-table.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.co
     AppNavComponent,
     PlayerListComponent,
     PlayerListTableComponent,
-    ScheduleListComponent
+    ScheduleListComponent,
+    ScheduleListTableComponent
   ],
   imports: [
     BrowserModule,

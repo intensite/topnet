@@ -26,7 +26,6 @@ export class PlayerListTableDataSource extends DataSource<any> {
   data: PlayerListTableItem[]; // = EXAMPLE_DATA;
 
   constructor(private playerService: PlayerService, private paginator: MatPaginator, private sort: MatSort) {
-  // constructor(private playerService: PlayerService) {
     super();
   }
 
