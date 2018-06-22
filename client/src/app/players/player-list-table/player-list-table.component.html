@@ -13,7 +13,7 @@
 
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-      <mat-cell *matCellDef="let row"><span layout-align="start center"><img src="assets/img/phantom_player.png" alt="" class="avatar"><a href="#" class="bold-link">{{row.name}}</a></span></mat-cell>
+      <mat-cell *matCellDef="let row"><span layout-align="start center"><img src="assets/img/phantom_player.png" alt="" class="avatar"><a routerLink="/players/1" class="bold-link">{{row.name}}</a></span></mat-cell>
     </ng-container>
     
     <ng-container matColumnDef="email">
