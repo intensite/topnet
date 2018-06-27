@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, of as observableOf, merge } from 'rxjs';
+import { PlayerService } from '../../services/player.service';
 
 @Component({
   selector: 'app-player-edit',
@@ -7,21 +9,40 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./player-edit.component.css']
 })
 export class PlayerEditComponent implements OnInit {
-  options: FormGroup;
+  playerEdit: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private playerService: PlayerService) {
+    console.log('Inside constructor...');
+  }
 
   ngOnInit() {
+    // debugger;
+    let player;
 
-    this.options = this.fb.group({
-      hideRequired: false,
-      floatLabel: 'auto',
-      text1: '',
-      text2: '',
-      select1: '',
+    this.playerService.getPlayerByID(1).subscribe(function (data) {
+      console.log(data);
+      player = data;
     });
 
-    this.options.valueChanges.subscribe(console.log)
+    console.log('Inside ngOnInit...');
+
+    this.playerEdit = this.fb.group({
+      hideRequired: false,
+      floatLabel: 'auto',
+      playerName: '',
+      phone1: '',
+      phone2: '',
+      email: '',
+      birthDate: '',
+      memberSince: '',
+      position: '',
+      gamesPlayed: '',
+      playerStatus: '',
+      skillPoints: '',
+      notes: '',
+    });
+
+    this.playerEdit.valueChanges.subscribe(console.log)
   }
 
 }

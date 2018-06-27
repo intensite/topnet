@@ -14,19 +14,20 @@ export class PlayerService {
   getPlayers(): Observable<any[]> {
     return this.http.get<any[]>(this.playerUrl)
       .pipe(
-        tap(heroes => this.log(`fetched players`)),
+        tap(players => this.log(`fetched players`)),
         catchError(this.handleError('getPlayers', []))
       );
   }
 
-  // /** GET hero by id. Will 404 if id not found */
-  // getHero(id: number): Observable<Player> {
-  //   const url = `${this.heroesUrl}/${id}`;
-  //   return this.http.get<Hero>(url).pipe(
-  //     tap(_ => this.log(`fetched hero id=${id}`)),
-  //     catchError(this.handleError<Hero>(`getHero id=${id}`))
-  //   );
-  // }
+  /** GET hero by id. Will 404 if id not found */
+  getPlayerByID(id: number): Observable<any> {
+    // debugger;
+    const url = `${this.playerUrl}/${id}`;
+    return this.http.get<any>(url).pipe(
+      tap(_ => this.log(`fetched player id=${id}`)),
+      catchError(this.handleError(`getHero id=${id}`))
+    );
+  }
 
   /** Log a HeroService message with the MessageService */
   private log(message: string) {

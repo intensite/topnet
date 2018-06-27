@@ -13,6 +13,7 @@ module.exports = {
 
     get: async function (req, res, next) {
         var id = req.params.id;
+        console.log(`Inside player::get(${id})`);
         const player = await playerService.getOneById(id);
         res.send(player);
     },

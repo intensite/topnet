@@ -1,38 +1,49 @@
-<div class="example-container">
-  <form [formGroup]="options">
-    <mat-checkbox formControlName="hideRequired">Hide required marker</mat-checkbox>
-    <div>
-      <label>Float label: </label>
-      <mat-radio-group formControlName="floatLabel">
-        <mat-radio-button value="auto">Auto</mat-radio-button>
-        <mat-radio-button value="always">Always</mat-radio-button>
-        <mat-radio-button value="never">Never</mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <br/>
-    <mat-divider></mat-divider>
-    <br/>
-    <mat-form-field [hideRequiredMarker]="options.value.hideRequired" [floatLabel]="options.value.floatLabel">
-      <input matInput formControlName="text1" placeholder="Simple placeholder" required>
-    </mat-form-field>
+<div class="container" style="padding: 2rem">
+  <h2>Modifier joueur</h2>
 
-    <mat-form-field [floatLabel]="options.value.floatLabel">
-      <mat-label>Both a label and a placeholder</mat-label>
-      <input matInput formControlName="text2" placeholder="Simple placeholder">
+  <form [formGroup]="playerEdit" fxLayout='row wrap' fxLayoutGap="20px">
+    <mat-form-field [floatLabel]="true" fxFlex="100%">
+      <input matInput formControlName="playerName" placeholder="Nom du joueur" required>
     </mat-form-field>
-
-    <mat-form-field [hideRequiredMarker]="options.value.hideRequired" [floatLabel]="options.value.floatLabel">
-      <mat-select formControlName="select1" required>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput formControlName="phone1" placeholder="Téléphone pricipal" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput formControlName="phone2" placeholder="Téléphone secondaire" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="100%">
+      <input matInput formControlName="email" placeholder="Courriel" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput formControlName="birthDate" placeholder="Date de naissance" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput formControlName="memberSince" placeholder="Membre depuis" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <mat-select formControlName="position" placeholder="Position" required>
         <mat-option>-- None --</mat-option>
-        <mat-option value="option">Option</mat-option>
-        <mat-option value="option2">Option2</mat-option>
-        <mat-option value="option3">Option3</mat-option>
+        <mat-option value="option">Attaquant</mat-option>
+        <mat-option value="option2">Défenseur</mat-option>
+        <mat-option value="option3">Gardien</mat-option>
       </mat-select>
-      <mat-label>
-        <mat-icon>favorite</mat-icon>
-        <b> Fancy</b>
-        <i> label</i>
-      </mat-label>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput formControlName="gamesPlayed" placeholder="Parties jouées" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <mat-select formControlName="playerStatus" placeholder="Status" required>
+        <mat-option>-- None --</mat-option>
+        <mat-option value="option">Regulier</mat-option>
+        <mat-option value="option2">Remplacant</mat-option>
+        <mat-option value="option3">Innactif</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput formControlName="skillPoints" placeholder="Points d'habilleté" required>
+    </mat-form-field>
+    <mat-form-field [floatLabel]="true" fxFlex="100%">
+      <textarea matInput formControlName="notes" rows="5" placeholder="Notes" required></textarea>
     </mat-form-field>
   </form>
 </div>
