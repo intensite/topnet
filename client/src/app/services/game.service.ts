@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-
+import { environment } from '../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
-  private gamerUrl = 'http://localhost:3000/api/game/';  // URL to web api
+  private gamerUrl = environment.hostIp+'game/';  // URL to web api
 
 
   constructor(private http: HttpClient) { }

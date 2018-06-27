@@ -4,7 +4,7 @@ var log = require('loglevel');
 var loglevelMessagePrefix = require('@natlibfi/loglevel-message-prefix');
 var app = express();
 var angularApp = express();
-
+var path = require('path')
 var config = require("./config.js")
 
 // Setup logging
@@ -50,7 +50,7 @@ app.use('/api', router);
 var server = app.listen(3000, function () {
     console.log("app running on port.", server.address().port);
 });
-
+angularApp.use(express.static(path.join(__dirname, 'dist/topnet')));
 var angularServer = angularApp.listen(8088, function () {
     console.log('Angular running')
 });
