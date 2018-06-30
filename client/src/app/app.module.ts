@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppNavComponent } from './app-nav/app-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
@@ -24,7 +25,7 @@ import { PlayerEditComponent } from './players/player-edit/player-edit.component
     PlayerListTableComponent,
     ScheduleListComponent,
     ScheduleListTableComponent,
-    PlayerEditComponent
+    PlayerEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,7 @@ import { PlayerEditComponent } from './players/player-edit/player-edit.component
     MatSortModule,
     MatCardModule,
     HttpClientModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
