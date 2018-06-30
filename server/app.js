@@ -54,4 +54,3 @@ angularApp.use(express.static(path.join(__dirname, 'dist/topnet')));
 var angularServer = angularApp.listen(8088, function () {
     console.log('Angular running')
 });
-
