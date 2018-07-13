@@ -14,9 +14,17 @@
     <mat-form-field [floatLabel]="true" fxFlex="100%">
       <input matInput formControlName="email" placeholder="Courriel" required>
     </mat-form-field>
-    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+
+    <!-- <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
       <input matInput formControlName="birthDate" placeholder="Date de naissance" required>
+    </mat-form-field> -->
+
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" [formControl]="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
+      <mat-datepicker #birthDate></mat-datepicker>
     </mat-form-field>
+
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
       <input matInput formControlName="memberSince" placeholder="Membre depuis" required>
     </mat-form-field>
@@ -45,5 +53,13 @@
     <mat-form-field [floatLabel]="true" fxFlex="100%">
       <textarea matInput formControlName="notes" rows="5" placeholder="Notes" required></textarea>
     </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button>Basic</button>
+      <button mat-raised-button color="primary">Primary</button>
+      <button mat-raised-button color="accent">Accent</button>
+      <button mat-raised-button color="warn">Warn</button>
+      <button mat-raised-button disabled>Disabled</button>
+      <a mat-raised-button routerLink=".">Link</a>
+    </div>
   </form>
 </div>
