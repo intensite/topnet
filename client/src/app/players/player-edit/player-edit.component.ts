@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { PlayerService } from '../../services/player.service';
 
@@ -11,7 +13,7 @@ import { PlayerService } from '../../services/player.service';
 export class PlayerEditComponent implements OnInit {
   playerEdit: FormGroup;
 
-  constructor(private fb: FormBuilder, private playerService: PlayerService) {
+  constructor(private fb: FormBuilder, private playerService: PlayerService, private route: ActivatedRoute) {
     console.log('Inside constructor...');
   }
 
@@ -19,12 +21,20 @@ export class PlayerEditComponent implements OnInit {
     // debugger;
     let player;
 
-    this.playerService.getPlayerByID(1).subscribe(function (data) {
-      console.log(data);
-      player = data;
-    });
+    this.route.params.subscribe(params => {
+      const id = Number.parseInt(params['id']);
 
-    console.log('Inside ngOnInit...');
+      this.playerService.getPlayerByID(id).subscribe(function (data) {
+        console.log(data);
+        player = data;
+
+
+      });
+    });
+    // // (+) converts string 'id' to a number
+    // .switchMap((params: Params) => this.yourProductService.getProductById(+params['id']))
+    // .subscribe((product) => this.product = product);
+
 
     this.playerEdit = this.fb.group({
       hideRequired: false,
@@ -43,6 +53,9 @@ export class PlayerEditComponent implements OnInit {
     });
 
     this.playerEdit.valueChanges.subscribe(console.log)
+    console.log('Inside ngOnInit...');
+
+
   }
 
 }

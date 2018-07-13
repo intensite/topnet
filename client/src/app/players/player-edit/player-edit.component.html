@@ -20,7 +20,7 @@
     </mat-form-field> -->
 
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" [formControl]="birthDate">
+      <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" formControlName="birthDate">
       <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
       <mat-datepicker #birthDate></mat-datepicker>
     </mat-form-field>
