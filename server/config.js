@@ -1,8 +1,10 @@
 module.exports = {
     db: {
+        // host: 'localhost',
         host: '192.168.70.98',
         database: 'topnet',
         user: 'root',
+        // password: 'password'
         password: 'gate$2db'
     },
 
