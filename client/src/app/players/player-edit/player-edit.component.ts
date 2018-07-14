@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { PlayerService } from '../../services/player.service';
 
@@ -11,48 +10,42 @@ import { PlayerService } from '../../services/player.service';
   styleUrls: ['./player-edit.component.css']
 })
 export class PlayerEditComponent implements OnInit {
-  playerEdit: FormGroup;
+  form: FormGroup;
+  player: Observable<any>;
 
-  constructor(private fb: FormBuilder, private playerService: PlayerService, private route: ActivatedRoute) {
-    console.log('Inside constructor...');
-  }
+  constructor(private fb: FormBuilder, private playerService: PlayerService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // debugger;
-    let player;
+
+    this.form = this.fb.group({
+      hideRequired: false,
+      floatLabel: 'auto',
+      name: '',
+      telephone1: '',
+      telephone2: '',
+      email: '',
+      birth_day: '',
+      member_since: '',
+      position: '',
+      game_played: '',
+      status: '',
+      skill_points: '',
+      player_notes: '',
+    });
+
 
     this.route.params.subscribe(params => {
       const id = Number.parseInt(params['id']);
+      console.log(`Player_id: ${id}`);
 
-      this.playerService.getPlayerByID(id).subscribe(function (data) {
-        console.log(data);
-        player = data;
-
-
+      this.playerService.getPlayerByID(id).subscribe(playerData => {
+        // console.log(playerData);
+        this.form.patchValue(playerData);
       });
     });
-    // // (+) converts string 'id' to a number
-    // .switchMap((params: Params) => this.yourProductService.getProductById(+params['id']))
-    // .subscribe((product) => this.product = product);
 
-
-    this.playerEdit = this.fb.group({
-      hideRequired: false,
-      floatLabel: 'auto',
-      playerName: '',
-      phone1: '',
-      phone2: '',
-      email: '',
-      birthDate: '',
-      memberSince: '',
-      position: '',
-      gamesPlayed: '',
-      playerStatus: '',
-      skillPoints: '',
-      notes: '',
-    });
-
-    this.playerEdit.valueChanges.subscribe(console.log)
+    this.form.valueChanges.subscribe(console.log)
     console.log('Inside ngOnInit...');
 
 

@@ -29,7 +29,7 @@ module.exports = {
     
     getOneById: async function (id) {
         const [result] = await db.query('select * from players where id = ?', id)
-        return result;
+        return result[0];
     },
 
     update: async function (id, values) {

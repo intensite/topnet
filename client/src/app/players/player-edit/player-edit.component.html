@@ -1,33 +1,37 @@
 <div class="container" style="padding: 2rem">
   <h2>Modifier joueur</h2>
 
-  <form [formGroup]="playerEdit" fxLayout='row wrap' fxLayoutGap="20px">
+  <form [formGroup]="form" fxLayout='row wrap' fxLayoutGap="20px">
     <mat-form-field [floatLabel]="true" fxFlex="100%">
-      <input matInput formControlName="playerName" placeholder="Nom du joueur" required>
+      <input matInput formControlName="name" placeholder="Nom du joueur" required>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput formControlName="phone1" placeholder="Téléphone pricipal" required>
+      <input matInput formControlName="telephone1" placeholder="Téléphone pricipal" required>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput formControlName="phone2" placeholder="Téléphone secondaire" required>
+      <input matInput formControlName="telephone2" placeholder="Téléphone secondaire" required>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="100%">
       <input matInput formControlName="email" placeholder="Courriel" required>
     </mat-form-field>
 
     <!-- <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput formControlName="birthDate" placeholder="Date de naissance" required>
+      <input matInput formControlName="birth_day" placeholder="Date de naissance" required>
     </mat-form-field> -->
 
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput [matDatepicker]="birthDate" placeholder="Date de naissance" formControlName="birthDate">
-      <mat-datepicker-toggle matSuffix [for]="birthDate"></mat-datepicker-toggle>
-      <mat-datepicker #birthDate></mat-datepicker>
+      <input matInput [matDatepicker]="birth_day" placeholder="Date de naissance" formControlName="birth_day">
+      <mat-datepicker-toggle matSuffix [for]="birth_day"></mat-datepicker-toggle>
+      <mat-datepicker #birth_day></mat-datepicker>
+    </mat-form-field>
+    
+    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
+      <!-- <input matInput formControlName="member_since" placeholder="Membre depuis" required> -->
+      <input matInput [matDatepicker]="member_since" placeholder="Membre depuis" formControlName="member_since">
+      <mat-datepicker-toggle matSuffix [for]="member_since"></mat-datepicker-toggle>
+      <mat-datepicker #member_since></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput formControlName="memberSince" placeholder="Membre depuis" required>
-    </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
       <mat-select formControlName="position" placeholder="Position" required>
         <mat-option>-- None --</mat-option>
@@ -37,10 +41,10 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput formControlName="gamesPlayed" placeholder="Parties jouées" required>
+      <input matInput formControlName="game_played" placeholder="Parties jouées" required>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <mat-select formControlName="playerStatus" placeholder="Status" required>
+      <mat-select formControlName="status" placeholder="Status" required>
         <mat-option>-- None --</mat-option>
         <mat-option value="option">Regulier</mat-option>
         <mat-option value="option2">Remplacant</mat-option>
@@ -48,10 +52,10 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="calc(50% - 25px)">
-      <input matInput formControlName="skillPoints" placeholder="Points d'habilleté" required>
+      <input matInput formControlName="skill_points" placeholder="Points d'habilleté" required>
     </mat-form-field>
     <mat-form-field [floatLabel]="true" fxFlex="100%">
-      <textarea matInput formControlName="notes" rows="5" placeholder="Notes" required></textarea>
+      <textarea matInput formControlName="player_notes" rows="5" placeholder="Notes" required></textarea>
     </mat-form-field>
     <div class="button-row">
       <button mat-raised-button>Basic</button>

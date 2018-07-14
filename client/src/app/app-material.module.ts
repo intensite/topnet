@@ -4,6 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 // import {MatSelectModule} from '@angular/material/select';
 // import {MatCheckboxModule} from '@angular/material/checkbox';
 // import {MatDatepickerModule} from '@angular/material/MatDatepicker';
+// import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -14,6 +15,7 @@ import {
   MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
+  MAT_DATE_LOCALE, MatDateFormats,
   MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
@@ -42,6 +44,7 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
+
 @NgModule({
   imports: [
     MatInputModule,
@@ -52,6 +55,7 @@ import {
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    // MatMomentDateModule,
   ],
   exports: [
     MatInputModule,
@@ -63,5 +67,6 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
   ],
+  providers: []
 })
 export class AppMaterialModule { }

@@ -20,13 +20,19 @@ export class PlayerService {
   }
 
   /** GET hero by id. Will 404 if id not found */
+  // getPlayerByID(id: number): Observable<any> {
+  //   debugger;
+  //   const url = `${this.playerUrl}/${id}`;
+  //   return this.http.get<any>(url).pipe(
+  //     tap(_ => {this.log(`fetched player id=${id}`);}),
+  //     catchError(this.handleError(`getHero id=${id}`))
+  //   );
+  // }
+  /** GET hero by id. Will 404 if id not found */
   getPlayerByID(id: number): Observable<any> {
     // debugger;
     const url = `${this.playerUrl}/${id}`;
-    return this.http.get<any>(url).pipe(
-      tap(_ => this.log(`fetched player id=${id}`)),
-      catchError(this.handleError(`getHero id=${id}`))
-    );
+    return this.http.get<any>(url);
   }
 
   /** Log a HeroService message with the MessageService */
