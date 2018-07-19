@@ -29,13 +29,13 @@ module.exports = {
     
     getOneById: async function (id) {
         const [result] = await db.query('select * from players where id = ?', id)
-        return result;
+        return result[0];
     },
 
     update: async function (id, values) {
         try {
             const [result] = await db.query('UPDATE players SET ? where id = ?', [values, id]);
-            return rows;
+            return result;
         } catch (err) {
             console.log(`Error in player_service::update()`);
             console.log(`Database UPDATE problems ${err}`);

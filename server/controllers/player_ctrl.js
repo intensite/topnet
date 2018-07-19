@@ -19,6 +19,7 @@ module.exports = {
     },
 
     update: async function (req, res, next) {
+        console.log(`Inside player_ctrl::update()`);
         var id = req.params.id;
         var values = req.body
         try {

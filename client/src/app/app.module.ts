@@ -49,4 +49,5 @@ import { PlayerEditComponent } from './players/player-edit/player-edit.component
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
