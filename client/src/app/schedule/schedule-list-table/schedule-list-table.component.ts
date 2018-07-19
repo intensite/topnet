@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ScheduleListTableDataSource } from './schedule-list-table-datasource';
 import { GameService } from '../../services/game.service';
@@ -17,9 +17,12 @@ export class ScheduleListTableComponent implements OnInit {
   displayedColumns = ['season_game_no', 'game_date', 'start_time', 'end_time',
     'location_name', 'home_team_name', 'away_team_name'];
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
+  }
+  ngAfterViewInit(){
     this.dataSource = new ScheduleListTableDataSource(this.gameService, this.paginator, this.sort);
+    this.cdr.detectChanges();
   }
 }
