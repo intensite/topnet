@@ -71,24 +71,31 @@ export class ScheduleListTableDataSource extends DataSource<ScheduleListTableIte
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<ScheduleListTableItem[]> {
-    return this.gameService.getGames();
-    // Combine everything that affects the rendered data into one update
-    // stream for the data-table to consume.
-    // const dataMutations = [
-    //   // observableOf(this.data),
-    //   this.gameService.getGames(),
-    //   this.paginator.page,
-    //   this.sort.sortChange
-    // ];
+    return new Observable<any[]>(observer => {
+      this.gameService.getGames().subscribe((g) => {
+        if (g) {
+          this.data = g;
+          return this.applyMutations(g).subscribe(data => {
+            observer.next(data);
+          });
+        }
+      });
+    });
+  }
+  applyMutations(tmpData: any[]): Observable<any[]> {
+    const dataMutations = [
+      observableOf(tmpData),
+      this.paginator.page,
+      this.sort.sortChange
+    ];
 
     // Set the paginators length
-    // this.paginator.length = this.data.length;
+    this.paginator.length = this.data.length;
 
-    // return merge(...dataMutations).pipe(map(() => {
-    //   return this.getPagedData(this.getSortedData([...this.data]));
-    // }));
+    return merge(...dataMutations).pipe(map(() => {
+      return this.getPagedData(this.getSortedData([...tmpData]));
+    }));
   }
-
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.

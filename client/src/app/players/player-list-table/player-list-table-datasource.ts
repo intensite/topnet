@@ -15,8 +15,6 @@ export interface PlayerListTableItem {
   status: number;
 }
 
-
-
 /**
  * Data source for the PlayerListTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
@@ -35,24 +33,34 @@ export class PlayerListTableDataSource extends DataSource<any> {
    * @returns A stream of the items to be rendered.
    */
   connect(): Observable<any[]> {
-      return this.playerService.getPlayers();
+    // Combine everything that affects the rendered data into one update
+    // stream for the data-table to consume.
+    return new Observable<any[]>(observer => {
+      this.playerService.getPlayers().subscribe((p) => {
+        if (p) {
+          this.data = p;
+          return this.applyMutations(p).subscribe(data => {
+            observer.next(data);
+          });
+        }
+      });
+    });
 
-    // // Combine everything that affects the rendered data into one update
-    // // stream for the data-table to consume.
-    // const dataMutations = [
-    //   this.playerService.getPlayers(),
-    //   this.paginator.page,
-    //   this.sort.sortChange
-    // ];
-
-    // // Set the paginators length
-    // this.paginator.length = this.data.length;
-
-    // return merge(...dataMutations).pipe(map(() => {
-    //   return this.getPagedData(this.getSortedData([...this.data]));
-    // }));
   }
+  applyMutations(tmpData: any[]): Observable<any[]> {
+    const dataMutations = [
+      observableOf(tmpData),
+      this.paginator.page,
+      this.sort.sortChange
+    ];
 
+    // Set the paginators length
+    this.paginator.length = this.data.length;
+
+    return merge(...dataMutations).pipe(map(() => {
+      return this.getPagedData(this.getSortedData([...tmpData]));
+    }));
+  }
   /**
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
