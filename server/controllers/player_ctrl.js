@@ -7,7 +7,7 @@ module.exports = {
     name: "Player",
 
     list: async function (req, res, next) {
-        const players = await playerService.getAll();
+        const players = await playerService.getAll(req.query);
         res.send(players);
     },
 
