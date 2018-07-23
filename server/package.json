@@ -12,9 +12,12 @@
     "@natlibfi/loglevel-message-prefix": "^3.0.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
     "mysql2": "^1.5.3",
-    "nodemailer": "^4.6.7"
+    "nodemailer": "^4.6.7",
+    "nodemailer-express-handlebars": "^3.0.0"
   }
 }

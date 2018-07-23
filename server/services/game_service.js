@@ -55,5 +55,22 @@ module.exports = {
             console.log(`Database UPDATE problems ${err}`);
             throw new Error(err);
         })
-    }
+    },
+
+    getGamePlayersAvailability: function(game_id, player_status) {
+
+        var sql = `select P.id, P.name, P.email, P.status, PGA.* from players P 
+                    Left join player_game_availability PGA
+                    on P.id = PGA.player_id and PGA.game_id = ?`;
+
+        if (player_status) {
+            sql += " WHERE P.status = ?";
+        }                    
+    
+        log.debug(sql);
+
+        return db.query(sql,[game_id,player_status]).then(([rows, fields]) => {
+            return rows;
+        })            
+    },
 }

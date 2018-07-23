@@ -33,6 +33,7 @@ app.route("/").get(function (req, res) {
 // router.use('/authenticate', require('./routes/auth_routes')());
 router.use('/player', require('./routes/player_routes')());  // To be moved in the autenticated route's section after testing
 router.use('/game', require('./routes/game_routes')());  // To be moved in the autenticated route's section after testing
+router.use('/email', require('./routes/email_routes')());  // To be moved in the autenticated route's section after testing
 
 // Routes bellow this line are to be protected by security token
 // var auth = require('./controllers/auth');
