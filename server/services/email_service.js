@@ -7,16 +7,26 @@ hbs = require('nodemailer-express-handlebars');
 * Setup the common SMTP and Template parameters.
 * Change with valid generic email address. 
 */
-var smtpConfig = {
-    host: 'smtp.bellnet.ca',
-    port: 25,
-    secure: false, // use SSL
-    // auth: {
-    //     user: 'user@gmail.com',
-    //     pass: 'pass'
-    // }
-    tls: {
-        rejectUnauthorized: false
+// var smtpConfig = {
+//     host: 'smtp.bellnet.ca',
+//     port: 25,
+//     secure: false, // use SSL
+//     // auth: {
+//     //     user: 'user@gmail.com',
+//     //     pass: 'pass'
+//     // }
+//     tls: {
+//         rejectUnauthorized: false
+//     }
+// };
+
+// Test smtp server at https://ethereal.email
+var smtpConfig ={
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'abiiflqtpgfyli32@ethereal.email',
+        pass: 'vve5s7RSHR1mRPD1mv'
     }
 };
 

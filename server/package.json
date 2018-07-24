@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "loglevel": "^1.6.1",
+    "moment": "^2.22.2",
     "mysql2": "^1.5.3",
     "nodemailer": "^4.6.7",
     "nodemailer-express-handlebars": "^3.0.0"

@@ -42,8 +42,8 @@ module.exports = {
     },
 
     getOneById: function(id) {        
-        return db.query('select * from games where id = ?', id).then(([rows, fields]) => {
-            return rows;
+        return db.query('select * from v_games where id = ?', id).then(([rows, fields]) => {
+            return rows[0];
         })
     },
 
@@ -58,19 +58,29 @@ module.exports = {
     },
 
     getGamePlayersAvailability: function(game_id, player_status) {
-
-        var sql = `select P.id, P.name, P.email, P.status, PGA.* from players P 
-                    Left join player_game_availability PGA
-                    on P.id = PGA.player_id and PGA.game_id = ?`;
-
+        
+        var sql = `select P.id, P.name, P.email, P.status, PGA.id as pga_id, player_id, game_id, game_player_status  from players P 
+        Left join player_game_availability PGA
+        on P.id = PGA.player_id and PGA.game_id = ?`;
+        
         if (player_status) {
             sql += " WHERE P.status = ?";
         }                    
-    
+        
         log.debug(sql);
-
+        
         return db.query(sql,[game_id,player_status]).then(([rows, fields]) => {
             return rows;
         })            
+    },
+    
+    setGamePlayersAvailability: function(player_id, game_id, player_status) {
+        return db.query('REPLACE INTO player_game_availability (player_id, game_id, game_player_status) VALUES (?, ?, ?)', [player_id, game_id, player_status]).then(([rows, fields]) => {
+            return rows;
+        }).catch((err) => {
+            console.log(`Error in game_service::setGamePlayersAvailability()`);
+            console.log(`Database UPDATE problems ${err}`);
+            throw new Error(err);
+        })
     },
 }

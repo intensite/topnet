@@ -1,11 +1,13 @@
 const log = require('loglevel');
 const _ = require("lodash");
+const moment = require("moment");
 const PciMailer = require("../services/email_service").PciMailer;
 var playerService = require('../services/player_service');
 var gameService = require('../services/game_service');
 var jwt = require('jsonwebtoken');
 
 const secret = "storeThisSecretInAConfigFile"
+var confirmationUrl = "http://localhost:3000/api/email/confirmation/";
 
 module.exports = {
     sedmailToRegularPlayers: async function (req, res) {
@@ -16,37 +18,47 @@ module.exports = {
         const playerStatusId = 2;
 
         var players = await gameService.getGamePlayersAvailability(gameId, playerStatusId)
+        var gameInfo = await gameService.getOneById(gameId)
 
-        // log.debug(players)
+        log.debug(players)
+        log.debug(gameInfo)
 
-        /*** UNCOMMENT THE FOREACH LOOP IN PRODUCTION */
-        // _.forEach(players, function(player){
-        //     if(player.game_player_status == null) {
-        //         log.debug(`Sending email to ${player.name} at ${player.email}`)
+        _.forEach(players, (player) => {
+            if (player.game_player_status == null) {
+                log.debug(`Sending email to ${player.name} at ${player.email}`)
 
-                var yesLinkEncoded = {};
-                yesLinkEncoded.userId = 1;
-                yesLinkEncoded.gameId = 1;
-                yesLinkEncoded.userAnswer = 'yes';
-                yesLinkEncoded.expiry = new Date(new Date('2018/08/31').getTime() + 24 * 60 * 60 * 1000);
-                log.debug(yesLinkEncoded);
-                var token = jwt.sign(yesLinkEncoded, secret);
+                var encodedLink = {};
+                encodedLink.playerId = player.id;
+                encodedLink.playerName = player.name;
+                encodedLink.gameId = gameId;
+                log.debug(`gameInfo.game_date = ${gameInfo.game_date}`);
+                encodedLink.expiry = new moment(gameInfo.game_date).endOf('day');
 
-                console.log("http://localhost:3000/api/email/confirmation/" + token);
+                encodedLink.userAnswer = 'yes';
+                var yesToken = jwt.sign(encodedLink, secret);
+
+                encodedLink.userAnswer = 'no';
+                var noToken = jwt.sign(encodedLink, secret);
+
+                log.debug(encodedLink);
+                //console.log(confirmationUrl + yesToken);
 
                 data = {
-                    player_name: 'Stephen Remillard',
-                    season_game_no: 1,
-                    game_date: '2018/08/31',
-                    start_time: '22:00',
-                    email: 'stephenr70@gmail.com',
+                    player_name: player.name,
+                    season_game_no: gameInfo.season_game_no,
+                    game_date: gameInfo.game_date,
+                    start_time: gameInfo.start_time,
+                    email: player.email,
+                    yesConfirmationLink: confirmationUrl + yesToken,
+                    noConfirmationLink: confirmationUrl + noToken,
                 }
 
                 var mailer = new PciMailer('game_confirmation');
                 mailer.send({ to: data.email, subject: 'Hockey' }, data);
-                res.status(200).send("Message sent...");
-        //     }
-        // });
+            }
+        });
+
+        res.status(200).send("Messages sent...");
 
 
     },
@@ -54,18 +66,30 @@ module.exports = {
     confirmationHandler: function (req, res) {
         console.log('Inside confirmationHandler...')
         var token = req.params.token;
-        var data = jwt.decode(token, secret);
-        console.log(new Date(data.expiry));
-        console.log(new Date());
-        if (new Date(data.expiry) > new Date()) {
 
-            console.log(data);
+        // invalid token - synchronous
+        try {
+            var data = jwt.verify(token, secret);
 
-            // TODO:  Save player's response into DB
+            console.log(new Date(data.expiry));
+            console.log(new Date());
+            if (new Date(data.expiry) > new Date()) {
 
-        } else {
-            console.log("Link is expired");
-            res.json({ error: "Link is expired" });
+                console.log(data);
+
+                // TODO:  Save player's response into DB
+                const GPA = gameService.setGamePlayersAvailability(data.playerId, data.gameId, data.userAnswer=='yes' ? 1 : 0 )
+
+                // Maybe we could send the answer using a nice handlebar template.
+                res.status(200).send(`Merci ${data.playerName} pour votre réponse!...`);
+
+            } else {
+                console.log("Link is expired");
+                res.json({ error: "Link is expired" });
+            }
+        } catch (err) {
+            console.log("Invalid Token");
+            res.json({ error: "Invalid Token" });
         }
     }
 }
