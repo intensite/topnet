@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { ScheduleListTableDataSource } from './schedule-list-table-datasource';
 import { GameService } from '../../services/game.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'schedule-list-table',
@@ -17,12 +18,18 @@ export class ScheduleListTableComponent implements OnInit {
   displayedColumns = ['season_game_no', 'game_date', 'start_time', 'end_time',
     'location_name', 'home_team_name', 'away_team_name'];
 
-  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) { }
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit() {
   }
+
   ngAfterViewInit(){
     this.dataSource = new ScheduleListTableDataSource(this.gameService, this.paginator, this.sort);
     this.cdr.detectChanges();
+  }
+
+  selectRow(row) {
+    console.log(row);
+    this.router.navigate(['roster', row.id]);
   }
 }

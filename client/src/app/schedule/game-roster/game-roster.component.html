@@ -1,0 +1,58 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
+
+  <div fxFlex="50%" fxFlexFill style="padding:10px;">
+    <mat-card class="md-elevation-z2 mat-typography">
+      <mat-card-header style="margin-left: 0px;">
+        <mat-card-title><h1>Joueurs sélectionnés</h1></mat-card-title>
+      </mat-card-header>
+      <!-- <mat-card-content [ngStyle]="{'background-color': '#0f9d58'}"> -->
+      <mat-card-content>
+        <mat-selection-list dense #shoes>
+          <h2>Réguliers</h2>
+          <!-- <mat-list-item *ngFor="let folder of folders">
+            <mat-icon matListIcon>folder</mat-icon>
+            <h4 matLine>{{folder.name}}</h4>
+            <p matLine class="demo-2"> {{folder.updated}} </p>
+          </mat-list-item> -->
+          <mat-list-option>
+            <!-- <mat-icon matListIcon>folder</mat-icon> -->
+            <h3 class="mat-h3">Stephen</h3>
+          </mat-list-option>
+          <mat-list-option>
+            <!-- <mat-icon matListIcon>folder</mat-icon> -->
+            <h2 class="mat-h2">Pierre</h2>
+          </mat-list-option>
+          <mat-list-option>
+            <!-- <mat-icon matListIcon>folder</mat-icon> -->
+            <h4>Jean</h4>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+          <h2>Remplacants</h2>
+          <mat-list-option>
+            <!-- <mat-icon matListIcon>note</mat-icon> -->
+            <h4>Jacques</h4>
+          </mat-list-option>
+        </mat-selection-list>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Ok</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex="50%" fxFlexFill style="padding:10px;">
+
+    <mat-card class="md-elevation-z2">
+      <mat-card-header>
+        <mat-card-title [ngStyle]="{'font-size':'24px'}">Joueurs disponibles</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Ok</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

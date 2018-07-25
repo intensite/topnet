@@ -16,6 +16,7 @@ import { PlayerListTableComponent } from './players/player-list-table/player-lis
 import { ScheduleListComponent } from './schedule/schedule-list/schedule-list.component';
 import { ScheduleListTableComponent } from './schedule/schedule-list-table/schedule-list-table.component';
 import { PlayerEditComponent } from './players/player-edit/player-edit.component';
+import { GameRosterComponent } from './schedule/game-roster/game-roster.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PlayerEditComponent } from './players/player-edit/player-edit.component
     ScheduleListComponent,
     ScheduleListTableComponent,
     PlayerEditComponent,
+    GameRosterComponent,
   ],
   imports: [
     BrowserModule,
